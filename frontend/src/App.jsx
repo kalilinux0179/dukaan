@@ -15,6 +15,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
+          {/* Customer Routes */}
+          <Route path='/' element={<Login />} />
           {/* seller routes */}
           <Route path="/seller" element={<SellerLayout />} >
             <Route index element={<SellerDashboard />} />
