@@ -9,6 +9,7 @@ import SellerDashboard from './pages/sellers/Layout/SellerDashboard'
 import SellersList from './pages/admin/SellersList'
 import CustomerList from './pages/admin/CustomerList'
 import Categories from './pages/admin/Category/Categories'
+import Layout from './pages/customer/Layout/Layout'
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/* Customer Routes */}
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Layout />} />
           {/* seller routes */}
           <Route path="/seller" element={<SellerLayout />} >
             <Route index element={<SellerDashboard />} />
