@@ -86,9 +86,9 @@ const AppSidebar = ({ ...props }) => {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="pt-4">
         <Link to="/dashboard" className="flex items-center gap-2 self-center font-medium">
-          {/* <Store size={28} />
-          Dukaan */}
-          <img src="http://localhost/kesyamart/seller/assets/images/logo-dark.png" alt="logo" width={150} />
+          <Store size={28} />
+          Dukaan
+          {/* <img src="http://localhost/kesyamart/seller/assets/images/logo-dark.png" alt="logo" width={150} /> */}
         </Link>
       </SidebarHeader>
       <SidebarContent>

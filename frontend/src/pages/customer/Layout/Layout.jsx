@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Layout = () => {
   return (
-    <div>Layout</div>
+    <>
+    <Link to="/auth/sa/login">Login</Link>
+    </>
   )
 }
 
