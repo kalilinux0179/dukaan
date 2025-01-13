@@ -6,7 +6,6 @@ import AdminLayout from './pages/admin/Layout/AdminLayout'
 import AdminDashboard from './pages/admin/Layout/AdminDashboard'
 import SellerLayout from './pages/sellers/Layout/SellerLayout'
 import SellerDashboard from './pages/sellers/Layout/SellerDashboard'
-import CustomerList from './pages/admin/CustomerList'
 import Categories from './pages/admin/Category/Categories'
 import Layout from './pages/customer/Layout/Layout'
 import Sellers from './pages/admin/Sellers/Sellers'
@@ -26,7 +25,6 @@ const App = () => {
           <Route path='/admin' element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="/admin/sellersList" element={<Sellers />} />
-            <Route path="/admin/customerList" element={<CustomerList />} />
             <Route path="/admin/categories" element={<Categories />} />
           </Route>
           {/* seller and admin routes */}
