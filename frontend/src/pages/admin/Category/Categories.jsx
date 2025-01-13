@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { api } from '@/utils/constant';
 import UpdateCategoryStatus from './UpdateCategoryStatus';
-import DeleteCategory from './deleteCategory';
+import DeleteCategory from './DeleteCategory';
 import UpdateCategory from './UpdateCategory';
 import nodata from "@/assets/nodata.svg"
 import {
