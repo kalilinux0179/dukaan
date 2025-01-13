@@ -9,6 +9,8 @@ import SellerDashboard from './pages/sellers/Layout/SellerDashboard'
 import Categories from './pages/admin/Category/Categories'
 import Layout from './pages/customer/Layout/Layout'
 import Sellers from './pages/admin/Sellers/Sellers'
+import Customer from './pages/admin/Customers/Customer'
+import Products from './pages/admin/Products/Products'
 
 const App = () => {
   return (
@@ -25,7 +27,9 @@ const App = () => {
           <Route path='/admin' element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="/admin/sellersList" element={<Sellers />} />
-            <Route path="/admin/categories" element={<Categories />} />
+            <Route path="/admin/customerList" element={<Customer />} />
+            <Route path="/admin/categoriesList" element={<Categories />} />
+            <Route path="/admin/productsList" element={<Products />} />
           </Route>
           {/* seller and admin routes */}
           <Route path='/auth/sa/login' element={<Login />} />

@@ -68,11 +68,11 @@ const data = {
       items: [
         {
           title: "Categories",
-          url: "/admin/categories",
+          url: "/admin/categoriesList",
         },
         {
           title: "Product List",
-          url: "/admin/customerList",
+          url: "/admin/productsList",
         },
 
       ],
