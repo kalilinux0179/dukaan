@@ -17,8 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-    origin: "*",
-    // origin: "https://dukaan-tan.vercel.app",
+    origin: [
+        "https://dukaan-tan.vercel.app",
+        "https://res.cloudinary.com",
+    ],
     credentials: true
 }));
 
