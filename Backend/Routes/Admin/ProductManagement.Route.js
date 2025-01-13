@@ -10,6 +10,6 @@ router.route("/addcategory").post(CheckAuthentication, upload.single("categoryIm
 router.route("/getallcateogries").get(CheckAuthentication, GetAllCategories);
 router.route("/updatecategorystatus/:id").post(CheckAuthentication, updateCategoryStatus);
 router.route("/deletcategory/:id").delete(CheckAuthentication, deleteCategory);
-router.route("/updatecategory").post(CheckAuthentication, upload.single("categoryImage"), updateCategory);
+router.route("/updatecategory/:id").post(CheckAuthentication, upload.single("categoryImage"), updateCategory);
 
 export default router;

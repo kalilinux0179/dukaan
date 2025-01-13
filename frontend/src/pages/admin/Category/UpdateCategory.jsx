@@ -10,9 +10,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { api } from "@/utils/constant";
+import axios from "axios";
 import { SquarePen } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const UpdateCategory = ({ data, onCategoryUpdate }) => {
     const [open, setOpen] = useState(false);
@@ -33,15 +36,26 @@ const UpdateCategory = ({ data, onCategoryUpdate }) => {
         }
     };
 
-    const updateCategory = async (formData) => {
-        console.log({ id: data._id, ...formData });
+    const updateCategory = async (formdata) => {
         try {
             setLoading(true);
-            // Add your API call to update the category here
-            onCategoryUpdate?.(formData); 
-            setOpen(false);
+            const formData = new FormData();
+            formData.append("categoryName", formdata.name);
+            formData.append("categoryDescription", formdata.description);
+            formData.append("categoryImage", formdata.image[0]);
+            const response = await axios.post(`${api}/admin/updatecategory/${data._id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }, withCredentials: true
+            })
+            if (response.data.success) {
+                toast.success(`${response.data.message} 👍`);
+                onCategoryUpdate?.(formData);
+                setOpen(false);
+            }
         } catch (error) {
             console.error("Update failed:", error);
+            console.log(error)
         } finally {
             setLoading(false);
         }

@@ -116,41 +116,40 @@ export const deleteCategory = async (req, res) => {
 
 export const updateCategory = async (req, res) => {
     try {
-        const { categoryId, categoryName, categoryDescription } = req.body;
+        const { id } = req.params;
+        const { categoryName, categoryDescription } = req.body;
         const categoryImage = req.file;
-        console.log(categoryId, categoryName, categoryDescription, categoryImage)
-        // const categoryData = await Category.findById(categoryId)
-        // if (!categoryData) {
-        //     return res
-        //         .status(404)
-        //         .json({
-        //             message: "Category Not Found!",
-        //             success: false
-        //         })
-        // }
-        // if (categoryName) { categoryData.categoryName = categoryName }
-        // if (categoryDescription) { categoryData.categoryDescription = categoryDescription }
-        // if (categoryImage) {
-        //     const oldImageUrl = categoryData.categoryImage;
-        //     const oldPublicId = oldImageUrl.split('/').pop().split('.')[0];
-        //     await cloudinary.uploader.destroy(oldPublicId);
-        //     const uploadResult = await cloudinary.uploader.upload(categoryImage.path, {
-        //         folder: "Mart/Category",
-        //     })
-        //     categoryData.categoryImage = uploadResult.secure_url
-        //     fs.unlink(categoryImage.path, (err) => {
-        //         if (err) {
-        //             console.error("Error deleting file from tmp folder:", err);
-        //         }
-        //     });
-        // }
-        // await categoryData.save();
+        const category = await Category.findById(id);
+        if (!category) {
+            return res.status(404).json({
+                message: "Category not found",
+                success: false
+            })
+        }
+        if (categoryName) { category.categoryName = categoryName; }
+        if (categoryDescription) { category.categoryDescription = categoryDescription; }
+        let oldImage = category.categoryImage;
+        const publicId = oldImage
+            .split('/')
+            .slice(-3)
+            .join('/')
+            .split('.')[0];
+        if (categoryImage) {
+            await cloudinary.uploader.destroy(publicId);
+            const uploadResult = await cloudinary.uploader.upload(categoryImage.path, {
+                folder: "Mart/Category",
+            })
+            fs.unlink(categoryImage.path, (err) => {
+                if (err) console.error("Error deleting file from tmp folder:", err);
+            });
+            category.categoryImage = uploadResult.secure_url;
+        }
+        await category.save();
         return res
             .status(200)
             .json({
                 message: "Category Updated Successfully",
                 success: true,
-                // categoryData
             })
     } catch (error) {
         return res.status(500).json({
