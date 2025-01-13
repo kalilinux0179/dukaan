@@ -71,11 +71,11 @@ export const Login = async (req, res) => {
             .cookie("token", jwtToken, {
                 httpOnly: true,
                 // for production
-                // sameSite: "strict",
-                // secure: true,
+                sameSite: "strict",
+                secure: true,
                 // for localhost only
-                sameSite: "lax",
-                secure: false,
+                // sameSite: "lax",
+                // secure: false,
                 maxAge: rememberMe ? 14 * 24 * 60 * 60 * 1000 : 2 * 24 * 60 * 60 * 1000,
             })
             .json({
