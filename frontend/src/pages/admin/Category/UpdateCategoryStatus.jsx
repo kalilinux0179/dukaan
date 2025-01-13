@@ -32,7 +32,7 @@ const UpdateCategoryStatus = ({ data, onCategoryStatusUpdated }) => {
                 onCheckedChange={() => updateCategoryStatus(data._id, !data.categoryStatus)}
             />
             <Label htmlFor="status">
-                <Badge variant={data.categoryStatus ? "default" : "destructive"} className="w-20 flex justify-center items-center font-bold">
+                <Badge variant={data.categoryStatus ? "default" : "destructive"} className="w-20 flex justify-center items-center font-medium">
                     {data.categoryStatus ? "Active" : "Inactive"}
                 </Badge>
             </Label>

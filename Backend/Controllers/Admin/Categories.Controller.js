@@ -98,7 +98,6 @@ export const deleteCategory = async (req, res) => {
             .join('/')
             .split('.')[0];
         const response = await cloudinary.uploader.destroy(publicId);
-        console.log(response);
         await Category.findByIdAndDelete(id);
         return res
             .status(200)

@@ -15,9 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import TableSkeleton from '@/components/Common/skeletons/TableSkeleton';
+import noDataImg from "@/assets/nodata.svg"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 
 const Categories = () => {
   const [categoryData, setCategoryData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchAllCategories = async () => {
     try {
@@ -46,48 +50,58 @@ const Categories = () => {
         <AddCategory onCategoryAdded={fetchAllCategories} />
       </div>
       <>
-        <div className='bg-muted/50 my-4 rounded-md p-4'>
+        <div className="bg-muted/50 rounded-lg p-4 my-4">
           {
-            categoryData &&
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-left">Category Name</TableHead>
-                  <TableHead className="text-center">Category Image</TableHead>
-                  <TableHead className="text-center">Category Description</TableHead>
-                  <TableHead className="text-center">Category Status</TableHead>
-                  <TableHead className="text-end">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {categoryData.map((data) => (
-                  <TableRow key={data._id}>
-                    <TableCell className="text-left capitalize">{data.categoryName}</TableCell>
-                    <TableCell className="flex justify-center items-center">
-                      <img src={data.categoryImage} alt={data.categoryName} width={30} />
-                    </TableCell>
-                    <TableCell className="text-center">{data.categoryDescription}</TableCell>
-                    <TableCell>
-                      <div className="flex justify-center items-center space-x-2">
-                        <UpdateCategoryStatus data={data} onCategoryStatusUpdated={fetchAllCategories} />
-                      </div>
-                    </TableCell>
-                    <TableCell >
-                      <div className="flex  justify-end items-center gap-1">
-                        <UpdateCategory data={data} onCategoryUpdate={fetchAllCategories} />
-                        <DeleteCategory data={data} onCategoryDelete={fetchAllCategories} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          }
-          {
-            !categoryData &&
-            <div className="flex justify-center items-center">
-              <img src={nodata} alt="No Data" className="w-1/2" />
-            </div>
+            loading ?
+              (
+                <TableSkeleton />
+              ) :
+              (
+                categoryData.length <= 0 ?
+                  (
+                    <AspectRatio ratio={13 / 6} className="flex justify-center items-center" >
+                      <img
+                        src={noDataImg}
+                        alt="No Data"
+                        className="max-h-full max-w-full rounded-md object-cover"
+                      />
+                    </AspectRatio>
+                  ) : (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="text-left">Category Name</TableHead>
+                          <TableHead className="text-center">Category Image</TableHead>
+                          <TableHead className="text-center">Category Description</TableHead>
+                          <TableHead className="text-center">Category Status</TableHead>
+                          <TableHead className="text-end">Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {categoryData.map((data) => (
+                          <TableRow key={data._id}>
+                            <TableCell className="text-left capitalize">{data.categoryName}</TableCell>
+                            <TableCell className="flex justify-center items-center">
+                              <img src={data.categoryImage} alt={data.categoryName} width={30} />
+                            </TableCell>
+                            <TableCell className="text-center">{data.categoryDescription}</TableCell>
+                            <TableCell>
+                              <div className="flex justify-center items-center space-x-2">
+                                <UpdateCategoryStatus data={data} onCategoryStatusUpdated={fetchAllCategories} />
+                              </div>
+                            </TableCell>
+                            <TableCell >
+                              <div className="flex  justify-end items-center gap-1">
+                                <UpdateCategory data={data} onCategoryUpdate={fetchAllCategories} />
+                                <DeleteCategory data={data} onCategoryDelete={fetchAllCategories} />
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  )
+              )
           }
         </div>
       </>

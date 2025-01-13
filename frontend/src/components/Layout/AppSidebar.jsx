@@ -2,7 +2,8 @@ import * as React from "react"
 import {
   SquareTerminal,
   Store,
-  UsersRound
+  UsersRound,
+  ShoppingBasket
 } from "lucide-react"
 import {
   Sidebar,
@@ -62,7 +63,7 @@ const data = {
     {
       title: "Product Management",
       url: "#",
-      icon: UsersRound,
+      icon: ShoppingBasket,
       isActive: false,
       items: [
         {

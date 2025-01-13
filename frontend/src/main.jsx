@@ -7,16 +7,17 @@ import { ThemeProvider } from "@/components/Common/theme-provider";
 import { Provider } from 'react-redux';
 import store, { persistor } from './store';
 import { PersistGate } from "redux-persist/integration/react";
+import "@fontsource/outfit/400.css";
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-        <Toaster />
-      </PersistGate>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+          <Toaster />
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </StrictMode>,

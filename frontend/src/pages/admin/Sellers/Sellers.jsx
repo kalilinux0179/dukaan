@@ -23,7 +23,7 @@ import noDataImg from "@/assets/nodata.svg"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import TableSkeleton from "@/components/Common/skeletons/TableSkeleton"
 
-const SellersList = () => {
+const Sellers = () => {
     const [sellersData, setSellersData] = useState([])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -117,4 +117,4 @@ const SellersList = () => {
     )
 }
 
-export default SellersList
+export default Sellers
