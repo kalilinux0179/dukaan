@@ -41,7 +41,7 @@ export const Register = async (req, res) => {
 export const Login = async (req, res) => {
     try {
         const { email, password, rememberMe } = req.body;
-        if (!email || !password ) {
+        if (!email || !password) {
             return res.status(400).json({
                 message: "All fields are required",
                 success: false
@@ -70,8 +70,8 @@ export const Login = async (req, res) => {
         return res.status(200)
             .cookie("token", jwtToken, {
                 httpOnly: true,
-                sameSite: "lax",
-                secure: process.env.NODE_ENV === "production",
+                secure: true,
+                sameSite: 'None',
                 maxAge: rememberMe ? 14 * 24 * 60 * 60 * 1000 : 2 * 24 * 60 * 60 * 1000,
             })
             .json({

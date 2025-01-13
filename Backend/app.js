@@ -16,13 +16,22 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+const allowedOrigins = [
+    "https://dukaan-tan.vercel.app",
+    "https://res.cloudinary.com",
+]
+
 app.use(cors({
-    origin: [
-        "https://dukaan-tan.vercel.app",
-        "https://res.cloudinary.com",
-    ],
-    credentials: true
-}));
+    credentials: true,
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}))
 
 
 // routes
