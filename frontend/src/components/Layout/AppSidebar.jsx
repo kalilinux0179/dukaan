@@ -22,22 +22,22 @@ import { useSelector } from "react-redux"
 const data = {
   sellerNav: [
     {
-      title: "User Management",
+      title: "Product Management",
       url: "#",
-      icon: SquareTerminal,
+      icon: ShoppingBasket,
       isActive: false,
       items: [
         {
-          title: "Seller",
-          url: "#",
+          title: "Sub Categories",
+          url: "/seller/subcategories",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "List Products",
+          url: "/seller/listproducts",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Add Products",
+          url: "/seller/addproducts",
         },
       ],
     },

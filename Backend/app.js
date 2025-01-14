@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./Database/index.js";
+import cookieParser from "cookie-parser";
 import AuthRoute from "./Routes/SellerAdmin/Auth.Route.js";
 import UserManagementRoute from "./Routes/Admin/UserManagement.Route.js";
 import ProductManagementRoute from "./Routes/Admin/ProductManagement.Route.js"
-import cookieParser from "cookie-parser";
+import SubCategoryManagementRoute from "./Routes/Sellers/SubCategories.Route.js"
 
 dotenv.config({
     path: "./.env",
@@ -39,6 +40,7 @@ app.use(cors({
 app.use("/api/sa/", AuthRoute)
 app.use("/api/admin/", UserManagementRoute)
 app.use("/api/admin/", ProductManagementRoute)
+app.use("/api/seller/", SubCategoryManagementRoute)
 
 // connect and listen
 const PORT = 4000;

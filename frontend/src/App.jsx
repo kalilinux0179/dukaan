@@ -11,6 +11,9 @@ import Layout from './pages/customer/Layout/Layout'
 import Sellers from './pages/admin/Sellers/Sellers'
 import Customer from './pages/admin/Customers/Customer'
 import Products from './pages/admin/Products/Products'
+import SubCategories from './pages/sellers/SubCategories/SubCategories'
+import ListProducts from './pages/sellers/Products/ListProducts'
+import AddProducts from './pages/sellers/Products/AddProducts'
 
 const App = () => {
   return (
@@ -22,6 +25,9 @@ const App = () => {
           {/* seller routes */}
           <Route path="/seller" element={<SellerLayout />} >
             <Route index element={<SellerDashboard />} />
+            <Route path="/seller/subcategories" element={<SubCategories />} />
+            <Route path="/seller/listproducts" element={<ListProducts />} />
+            <Route path="/seller/addproducts" element={<AddProducts />} />
           </Route>
           {/* admin routes */}
           <Route path='/admin' element={<AdminLayout />}>

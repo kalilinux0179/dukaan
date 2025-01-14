@@ -52,7 +52,7 @@ export const CreateCategory = async (req, res) => {
 
 export const GetAllCategories = async (req, res) => {
     try {
-        const categories = await Category.find({ categoryCreatedBy: req.user.id }).sort({ createdAt: -1 });
+        const categories = await Category.find().sort({ createdAt: -1 });
         return res
             .status(200)
             .json({
