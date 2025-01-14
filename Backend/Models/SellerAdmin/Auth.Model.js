@@ -26,7 +26,7 @@ const AuthSchema = new Schema({
             "Banned",
             "Warned"
         ],
-        default: "active"
+        default: "Active"
     },
     role: {
         type: String,

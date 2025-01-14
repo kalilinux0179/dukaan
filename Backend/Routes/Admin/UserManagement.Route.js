@@ -5,6 +5,6 @@ import CheckAuthentication from "../../utils/CheckAuthentication.js";
 const router = express.Router()
 router.route("/getallsellers").get(CheckAuthentication,GetSellersList)
 router.route("/deleteseller/:id").delete(CheckAuthentication, DeleteSeller)
-router.route("/updatesellerstatus/:id").post( updateSellerStatus)
+router.route("/updatesellerstatus/:id").post(CheckAuthentication, updateSellerStatus)
 
 export default router
