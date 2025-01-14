@@ -17,6 +17,7 @@ import NavUser from "./NavUser"
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
+import logo from "@/assets/logo.png"
 
 // This is sample data.
 const data = {
@@ -87,9 +88,7 @@ const AppSidebar = ({ ...props }) => {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="pt-4">
         <Link to="/dashboard" className="flex items-center gap-2 self-center font-medium">
-          <Store size={28} />
-          Dukaan
-          {/* <img src="http://localhost/kesyamart/seller/assets/images/logo-dark.png" alt="logo" width={150} /> */}
+          <img src={logo} alt="logo" width={150} />
         </Link>
       </SidebarHeader>
       <SidebarContent>
