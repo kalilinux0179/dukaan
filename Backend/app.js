@@ -20,9 +20,9 @@ app.use(cookieParser());
 
 const allowedOrigins = [
     "https://dukaandar.vercel.app",
-    "https://dukaan-tan.vercel.app",
     "https://res.cloudinary.com",
     "http://localhost:5173",
+    "http://localhost:4000"
 ]
 
 app.use(cors({
