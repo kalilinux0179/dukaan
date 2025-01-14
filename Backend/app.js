@@ -26,6 +26,7 @@ const allowedOrigins = [
 
 app.use(cors({
     credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     origin: (origin, callback) => {
         if (allowedOrigins.includes(origin) || !origin) {
             callback(null, true);
