@@ -65,7 +65,9 @@ export const Login = async (req, res) => {
         let userData = {
             fullName: userExists.fullName,
             email: userExists.email,
-            role: userExists.role
+            role: userExists.role,
+            verified: userExists.verified,
+            status: userExists.status
         }
         return res.status(200)
             .cookie("token", jwtToken, {

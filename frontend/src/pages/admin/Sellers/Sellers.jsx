@@ -1,4 +1,13 @@
 import { Badge } from "@/components/ui/badge"
+import { api } from "@/utils/constant"
+import axios from "axios"
+import { useState } from "react"
+import noDataImg from "@/assets/nodata.svg"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import TableSkeleton from "@/components/Common/skeletons/TableSkeleton"
+import DeleteSeller from "./DeleteSeller"
+import UpdateSeller from "./UpdateSeller"
+import UpdateSellerStatus from "./UpdateSellerStatus"
 import {
     Table,
     TableBody,
@@ -7,38 +16,31 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { api } from "@/utils/constant"
-import axios from "axios"
-import { Binoculars, SquarePen, Trash2 } from "lucide-react"
-import { useEffect, useState } from "react"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import noDataImg from "@/assets/nodata.svg"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import TableSkeleton from "@/components/Common/skeletons/TableSkeleton"
+
 
 const Sellers = () => {
     const [sellersData, setSellersData] = useState([])
     const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        const fetchAllSellers = async () => {
-            try {
-                setLoading(true)
-                const response = await axios.get(`${api}/admin/getallsellers`)
-                setSellersData(response.data.data);
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setLoading(false)
-            }
+
+    const fetchAllSellers = async () => {
+        try {
+            setLoading(true)
+            const response = await axios.get(`${api}/admin/getallsellers`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            })
+            setSellersData(response.data.data);
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
         }
-        fetchAllSellers();
+    }
+
+    useState(() => {
+        fetchAllSellers()
     }, [])
     return (
         <>
@@ -83,25 +85,13 @@ const Sellers = () => {
                                                     </TableCell>
                                                     <TableCell >
                                                         <div className="flex justify-center items-center gap-4">
-                                                            <Select>
-                                                                <SelectTrigger className="w-[150px] rounded-lg">
-                                                                    <SelectValue placeholder="Status" />
-                                                                </SelectTrigger>
-                                                                <SelectContent>
-                                                                    <SelectGroup>
-                                                                        <SelectItem value="suspended">Suspended</SelectItem>
-                                                                        <SelectItem value="banned">Banned</SelectItem>
-                                                                        <SelectItem value="warned">Warned</SelectItem>
-                                                                    </SelectGroup>
-                                                                </SelectContent>
-                                                            </Select>
+                                                            <UpdateSellerStatus data={data} onUpdateSellerStatus={fetchAllSellers} />
                                                         </div>
                                                     </TableCell>
                                                     <TableCell >
                                                         <div className="flex justify-end items-center gap-4">
-                                                            <Binoculars />
-                                                            <SquarePen />
-                                                            <Trash2 />
+                                                            <UpdateSeller data={data} onUpdateSeller={fetchAllSellers} />
+                                                            <DeleteSeller data={data} onDeleteSeller={fetchAllSellers} />
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>

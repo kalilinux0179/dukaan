@@ -18,6 +18,16 @@ const AuthSchema = new Schema({
         type: Boolean,
         default: false
     },
+    status: {
+        type: String,
+        enum: [
+            "Active",
+            "Suspended",
+            "Banned",
+            "Warned"
+        ],
+        default: "active"
+    },
     role: {
         type: String,
         enum: [
