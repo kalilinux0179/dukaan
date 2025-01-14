@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const allowedOrigins = [
+    "https://dukaandar.vercel.app/",
     "https://dukaan-tan.vercel.app",
     "https://res.cloudinary.com",
     "http://localhost:5173",
