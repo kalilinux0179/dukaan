@@ -5,8 +5,8 @@ import connectDB from "./Database/index.js";
 import cookieParser from "cookie-parser";
 import AuthRoute from "./Routes/SellerAdmin/Auth.Route.js";
 import UserManagementRoute from "./Routes/Admin/UserManagement.Route.js";
-import ProductManagementRoute from "./Routes/Admin/ProductManagement.Route.js"
-import SubCategoryManagementRoute from "./Routes/Sellers/SubCategories.Route.js"
+import ProductManagementRoute from "./Routes/Admin/ProductManagement.Route.js";
+import SubCategoryManagementRoute from "./Routes/Sellers/SubCategories.Route.js";
 
 dotenv.config({
     path: "./.env",
@@ -18,35 +18,43 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Allowed origins for CORS
 let allowedOrigins = [
     "https://dukaandar.vercel.app",
     "https://res.cloudinary.com",
     "http://localhost:5173",
-]
+];
 
-app.use(cors({
-    credentials: true,
-    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: (origin, callback) => {
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
-}))
-
-
-// routes
-app.use("/api/sa/", AuthRoute)
-app.use("/api/admin/", UserManagementRoute)
-app.use("/api/admin/", ProductManagementRoute)
-app.use("/api/seller/", SubCategoryManagementRoute)
-
-// connect and listen
-const PORT = 4000;
-connectDB().then(
-    app.listen(PORT, () => {
-        console.log(`[+] Server is running on http://localhost:${PORT}`)
+// CORS middleware
+app.use(
+    cors({
+        credentials: true,
+        methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                console.error(`Blocked by CORS: ${origin}`);
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
     })
-).catch()
+);
+
+// Routes
+app.use("/api/sa/", AuthRoute);
+app.use("/api/admin/", UserManagementRoute);
+app.use("/api/admin/", ProductManagementRoute);
+app.use("/api/seller/", SubCategoryManagementRoute);
+
+// Connect to the database and start the server
+const PORT = 4000;
+connectDB()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`[+] Server is running on http://localhost:${PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.error(`[!] Failed to connect to the database: ${err.message}`);
+    });
