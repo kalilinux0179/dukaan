@@ -19,31 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Allowed origins for CORS
-let allowedOrigins = [
-    "https://dukaandar.vercel.app",
-    "https://res.cloudinary.com",
-    "http://localhost:5173",
-];
-
-// CORS middleware
-app.use(
-    cors({
-        credentials: true,
-        methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-        allowedHeaders: ["Content-Type"], 
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                console.error(`Blocked by CORS: ${origin}`);
-                callback(null, false);
-            }
-        },
-    })
-);
-
-// Handle preflight requests
-app.options("*", cors());
+const corsOptions  = {
+    credentials: true,
+    origin: ["http://localhost:5173","https://dukaandar.vercel.app","https://res.cloudinary.com"]
+};
+app.use(cors(corsOptions ));
 
 // Routes
 app.use("/api/sa/", AuthRoute);
