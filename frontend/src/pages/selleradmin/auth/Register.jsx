@@ -26,7 +26,12 @@ const Register = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await axios.post(`${api}/sa/register`, credentials);
+      const response = await axios.post(`${api}/sa/register`, credentials, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true
+      });
       if (response.data.success) {
         toast.success(`${response.data.message} 👍`);
         setCredentials({
@@ -83,7 +88,7 @@ const Register = () => {
                         />
                       </div>
                       <div className="grid gap-2">
-                          <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Password</Label>
                         <Input
                           id="password"
                           type="password"

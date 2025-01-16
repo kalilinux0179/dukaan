@@ -30,12 +30,13 @@ app.use(
     cors({
         credentials: true,
         methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+        allowedHeaders: ["Content-Type"], 
         origin: (origin, callback) => {
             if (!origin || allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
                 console.error(`Blocked by CORS: ${origin}`);
-                callback(null, false); // Return false instead of an error
+                callback(null, false);
             }
         },
     })

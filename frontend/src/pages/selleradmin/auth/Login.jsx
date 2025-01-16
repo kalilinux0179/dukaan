@@ -31,6 +31,9 @@ const Login = () => {
         try {
             setLoading(true);
             const response = await axios.post(`${api}/sa/login`, credentials, {
+                headers:{
+                    "Content-Type": "application/json",
+                },
                 withCredentials: true
             });
             if (response.data.success) {
