@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const allowedOrigins = [
+let allowedOrigins = [
     "https://dukaandar.vercel.app",
     "https://res.cloudinary.com",
     "http://localhost:5173",
@@ -26,7 +26,7 @@ const allowedOrigins = [
 
 app.use(cors({
     credentials: true,
-    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
     origin: (origin, callback) => {
         if (allowedOrigins.includes(origin) || !origin) {
             callback(null, true);
