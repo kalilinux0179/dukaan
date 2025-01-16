@@ -35,11 +35,14 @@ app.use(
                 callback(null, true);
             } else {
                 console.error(`Blocked by CORS: ${origin}`);
-                callback(new Error("Not allowed by CORS"));
+                callback(null, false); // Return false instead of an error
             }
         },
     })
 );
+
+// Handle preflight requests
+app.options("*", cors());
 
 // Routes
 app.use("/api/sa/", AuthRoute);
@@ -52,7 +55,7 @@ const PORT = 4000;
 connectDB()
     .then(() => {
         app.listen(PORT, () => {
-            console.log(`[+] Server is running on http://localhost:${PORT}`);
+            console.log(`[+] Server is running on https://localhost:${PORT}`);
         });
     })
     .catch((err) => {
