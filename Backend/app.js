@@ -19,11 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Allowed origins for CORS
-const corsOptions  = {
+const corsOptions = {
     credentials: true,
-    origin: ["http://localhost:5173","https://dukaandar.vercel.app","https://res.cloudinary.com"]
+    origin: ["http://localhost:5173", "https://dukaandar.vercel.app", "https://res.cloudinary.com"]
 };
-app.use(cors(corsOptions ));
+app.use(cors(corsOptions));
+app.options("*", cors());
 
 // Routes
 app.use("/api/sa/", AuthRoute);
